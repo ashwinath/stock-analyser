@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Chewy');
+
+body {
+  padding: 10px 10px;
+}
+
+#brand {
+  font-family: 'Chewy', cursive;
+  text-align: center;
+  vertical-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#search-bar {
+  float: right;
+}
+
+#top-bar {
+  background: rgb(255, 166, 89);
+}
