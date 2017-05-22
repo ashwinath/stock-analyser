@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SearchBar from '../search/SearchBar'
+import SearchBar from './SearchBar'
 import Brand from './Brand'
 
 class TopBar extends Component {
