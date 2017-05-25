@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { Wave } from 'better-react-spinkit';
 import quandlApi from '../utils/quandlApi';
-import Loading from '../Loading';
 import createPlotlyComponent from 'react-plotlyjs';
-import Plotly from 'plotly.js/dist/plotly-finance'
+import Plotly from 'plotly.js/dist/plotly-finance';
 const PlotlyComponent = createPlotlyComponent(Plotly);
 
 class CandleStickGraph extends Component {
@@ -62,7 +62,7 @@ class CandleStickGraph extends Component {
 
     if (loading) {
       return (
-        <Loading />
+        <Wave id='spinner' size={100} color='orange'/>
       );
     } else if (error) {
       return (
