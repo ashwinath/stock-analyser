@@ -17,7 +17,7 @@ class TopBar extends Component {
     return(
       <div id='top-bar' className='ui grid'>
         <div className='five wide column'>
-          <SearchBar />
+          <SearchBar setStockName={this.props.setStockName}/>
         </div>
         <div className='six wide column'>
           <Brand />

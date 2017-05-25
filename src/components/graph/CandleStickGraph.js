@@ -15,10 +15,11 @@ class CandleStickGraph extends Component {
       error: false,
       data: null
     };
+    this.loadData = this.loadData.bind(this);
   }
 
-  componentDidMount() {
-    quandlApi.getStockData('AAPL')
+  loadData(stockName) {
+    quandlApi.getStockData(stockName)
       .then(data => {
         if (data === null) {
           return this.setState(() => {
@@ -38,6 +39,21 @@ class CandleStickGraph extends Component {
           });
         }
       });
+  }
+
+  componentDidMount() {
+    this.loadData(this.props.stockName);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(() => {
+      return {
+        loading: true,
+        error: false,
+        data: null
+      }
+    });
+    this.loadData(nextProps.stockName);
   }
 
   render() {

@@ -6,15 +6,16 @@ class SearchBar extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit() {
-
+  handleSubmit(input) {
+    input.preventDefault();
+    this.props.setStockName(this.refs.stockName.value);
   }
 
   render() {
     return (
       <form id='search-bar' className='ui input icon' onSubmit={this.handleSubmit}>
         <i className='search icon'></i>
-        <input type='text' name="search" placeholder='Search Stocks...'/>
+        <input ref='stockName' type='text' name="search" placeholder='Search Stocks...'/>
       </form>
     );
   }
