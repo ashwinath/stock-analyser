@@ -24,7 +24,6 @@ function getStockData(stock) {
   // set months ago to 6
   const date = getNumMonthsAgoDateFormatted(6);
   const encodedUri = window.encodeURI(`https://www.quandl.com/api/v3/datasets/WIKI/${stock}.csv?start_date=${date}`);
-    console.log(date)
 
   return axios.get(encodedUri)
     .then(response => {

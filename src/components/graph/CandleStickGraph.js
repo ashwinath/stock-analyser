@@ -65,7 +65,6 @@ class CandleStickGraph extends Component {
         showlegend: false, 
         xaxis: {
           domain: [0, 1], 
-          title: 'Date', 
           type: 'date'
         }, 
         yaxis: {

@@ -1,7 +1,7 @@
 'use strict';
 
 // Import parts of electron to use
-const {app, BrowserWindow} = require('electron');
+const {ipcMain, app, BrowserWindow} = require('electron');
 const path = require('path')
 const url = require('url')
 
@@ -18,7 +18,7 @@ if ( process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) 
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1600, height: 1000, show: false
+    width: 1600, height: 1000, show: false, frame: false
   });
 
   mainWindow.setMenu(null)
@@ -79,4 +79,8 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+ipcMain.on('minimize', (event, arg) => {
+  mainWindow.minimize();
 });
