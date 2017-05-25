@@ -5,8 +5,26 @@ let quandlApi = {
   getStockData: getStockData
 };
 
+function getNumMonthsAgoDateFormatted(months) {
+  let xMonthsAgo = new Date();
+  xMonthsAgo.setMonth(xMonthsAgo.getMonth() - months);
+  const year = xMonthsAgo.getFullYear();
+  let month = xMonthsAgo.getMonth();
+  if (month < 10) {
+    month = '0' + month;
+  }
+  let day = xMonthsAgo.getDay();
+  if (day < 10) {
+    day = '0' + day;
+  }
+  return `${year}-${month}-${day}`;
+}
+
 function getStockData(stock) {
-  const encodedUri = window.encodeURI('https://www.quandl.com/api/v3/datasets/WIKI/' + stock + '.csv?start_date=2010-01-01');
+  // set months ago to 6
+  const date = getNumMonthsAgoDateFormatted(6);
+  const encodedUri = window.encodeURI(`https://www.quandl.com/api/v3/datasets/WIKI/${stock}.csv?start_date=${date}`);
+    console.log(date)
 
   return axios.get(encodedUri)
     .then(response => {
@@ -31,7 +49,6 @@ function getStockData(stock) {
         formattedData.low.unshift(d.Low);
         formattedData.open.unshift(d.Close);
       });
-      console.log(formattedData)
       return formattedData;
     })
     .catch(error => {
