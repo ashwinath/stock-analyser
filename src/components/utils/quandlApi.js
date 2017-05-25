@@ -6,13 +6,13 @@ let quandlApi = {
 };
 
 function getStockData(stock) {
-  const encodedUri = window.encodeURI('https://www.quandl.com/api/v3/datasets/WIKI/' + stock + '.csv');
+  const encodedUri = window.encodeURI('https://www.quandl.com/api/v3/datasets/WIKI/' + stock + '.csv?start_date=2010-01-01');
 
   return axios.get(encodedUri)
     .then(response => {
       let csvParsedObject = csvParse(response.data);
       let formattedData = {
-        date: [],
+        x: [], // date
         close: [],
         high: [],
         low: [],
@@ -25,11 +25,11 @@ function getStockData(stock) {
         yaxis: 'y'
       }
       csvParsedObject.forEach((d, i) => {
-        formattedData.date.unshift(d.Date);
-        formattedData.close.unshift(+d.Open);
-        formattedData.high.unshift(+d.High);
-        formattedData.low.unshift(+d.Low);
-        formattedData.open.unshift(+d.Close);
+        formattedData.x.unshift(d.Date);
+        formattedData.close.unshift(d.Open);
+        formattedData.high.unshift(d.High);
+        formattedData.low.unshift(d.Low);
+        formattedData.open.unshift(d.Close);
       });
       console.log(formattedData)
       return formattedData;

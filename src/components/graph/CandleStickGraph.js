@@ -64,13 +64,11 @@ class CandleStickGraph extends Component {
         }, 
         showlegend: false, 
         xaxis: {
-          autorange: true, 
           domain: [0, 1], 
           title: 'Date', 
           type: 'date'
         }, 
         yaxis: {
-          autorange: true, 
           domain: [0, 1], 
           type: 'linear'
         }
@@ -79,7 +77,6 @@ class CandleStickGraph extends Component {
         showLink: false,
         displayModeBar: true
       }
-      
       return (
         <PlotlyComponent data={data} layout={layout} config={config}/>
       );
