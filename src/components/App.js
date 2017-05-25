@@ -7,9 +7,9 @@ import CandleStickGraph from './graph/CandleStickGraph'
 class App extends Component {
   render() {
     return (
-      <div>
+      <div id="app-root">
         <TopBar/>
-        <CandleStickGraph/>
+        <CandleStickGraph className='graph-plot' />
       </div>
     );
   }

@@ -5,7 +5,7 @@ import Brand from './Brand'
 class TopBar extends Component {
   render() {
     return(
-      <section id='top-bar' className='ui grid'>
+      <div id='top-bar' className='ui grid'>
         <div className='five wide column'/>
         <div className='six wide column'>
           <Brand />
@@ -14,7 +14,7 @@ class TopBar extends Component {
         <div className='three wide column'>
           <SearchBar />
         </div>
-      </section>
+      </div>
     );
   }
 }

@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import quandlApi from '../utils/quandlApi';
 import Loading from '../Loading';
-const ReStock = require('react-stockcharts');
-
-console.log(ReStock)
-const { ChartCanvas, Chart } = ReStock;
-const { CandlestickSeries } = ReStock.series;
-const { XAxis, YAxis } = ReStock.axes;
-const { discontinuousTimeScaleProvider } = ReStock.scale;
+import createPlotlyComponent from 'react-plotlyjs';
+import Plotly from 'plotly.js/dist/plotly-finance'
+const PlotlyComponent = createPlotlyComponent(Plotly);
 
 class CandleStickGraph extends Component {
 
@@ -24,20 +20,19 @@ class CandleStickGraph extends Component {
   componentDidMount() {
     quandlApi.getStockData('AAPL')
       .then(data => {
-        // ERROR
         if (data === null) {
           return this.setState(() => {
             return {
-              error: true,
               loading: false,
+              error: true,
               data: null
             }
           });
         } else {
-          this.setState(() => {
+          return this.setState(() => {
             return {
-              error: false,
               loading: false,
+              error: false,
               data: data
             }
           });
@@ -58,9 +53,35 @@ class CandleStickGraph extends Component {
         <h1>Something went wrong</h1>
       );
     } else {
-      console.log(this.state.data)
+      const data = [this.state.data];
+      const layout = {
+        dragmode: 'zoom', 
+        margin: {
+          r: 10, 
+          t: 25, 
+          b: 40, 
+          l: 60
+        }, 
+        showlegend: false, 
+        xaxis: {
+          autorange: true, 
+          domain: [0, 1], 
+          title: 'Date', 
+          type: 'date'
+        }, 
+        yaxis: {
+          autorange: true, 
+          domain: [0, 1], 
+          type: 'linear'
+        }
+      };
+      const config = {
+        showLink: false,
+        displayModeBar: true
+      }
+      
       return (
-        <h1>TODO: PUT A GRAPH</h1>
+        <PlotlyComponent data={data} layout={layout} config={config}/>
       );
     }
   }
