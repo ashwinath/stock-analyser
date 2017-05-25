@@ -8,8 +8,6 @@ let quandlApi = {
 function getStockData(stock) {
   const encodedUri = window.encodeURI('https://www.quandl.com/api/v3/datasets/WIKI/' + stock + '.csv');
 
-  let parseDate = timeParse('%Y-%m-%d');
-
   return axios.get(encodedUri)
     .then(response => {
       let csvParsedObject = csvParse(response.data);
